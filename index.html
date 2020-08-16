@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+        <script>
+            function a(){
+                history.pushState({},'','/app3')
+            }
+            function b(){
+                history.pushState({},'','/app4')
+            }
+        </script>
+        <a href="#/app1">
+            应用1
+        </a>
+        <a href="#/app2">
+            应用2
+        </a href="">    
+        <button onclick="a()">应用3</button>
+        <button onclick="b()">应用4</button>
+		<script src="/lib/umd/single-spa.js"></script>
+		<script>
+			singleSpa.registerApplication(
+				"app1",
+				async (props) => {
+					console.log("加载执行");
+					return {
+						bootstrap: [
+							async (props) => {
+								console.log("b1");
+							},
+							async (props) => {
+								console.log("b1");
+							},
+							async (props) => {
+								console.log("b1");
+							},
+						],
+						mount: async (props) => {
+							console.log("mount1");
+						},
+						unmount: async (props) => {
+							console.log("unmount1");
+						},
+					};
+				},
+				(location) => location.hash.startsWith("#/app1"),
+				{ store: { name: "yehuozhili" } }
+			);
+			singleSpa.registerApplication(
+				"app2",
+				async (props) => {
+					console.log("加载执行2");
+					return {
+						bootstrap: [
+							async (props) => {
+								console.log("b2");
+							},
+							async (props) => {
+								console.log("b2");
+							},
+							async (props) => {
+								console.log("b2");
+							},
+						],
+						mount: async (props) => {
+							console.log("mount2");
+						},
+						unmount: async (props) => {
+							console.log("unmount2");
+						},
+					};
+				},
+				(location) => location.hash.startsWith("#/app2"),
+				{ store: { name: "yehuozhili2" } }
+            );
+            singleSpa.registerApplication(
+				"app3",
+				async (props) => {
+					console.log("加载执行3");
+					return {
+						bootstrap: [
+							async (props) => {
+								console.log("b3");
+							},
+							async (props) => {
+								console.log("b3");
+							},
+							async (props) => {
+								console.log("b3");
+							},
+						],
+						mount: async (props) => {
+							console.log("mount3");
+						},
+						unmount: async (props) => {
+							console.log("unmount3");
+						},
+					};
+				},
+				(location) => location.pathname.startsWith("/app3"),
+				{ store: { name: "yehuozhili3" } }
+            );
+            
+            singleSpa.registerApplication(
+				"app4",
+				async (props) => {
+					console.log("加载执行4");
+					return {
+						bootstrap: [
+							async (props) => {
+								console.log("b4");
+							},
+							async (props) => {
+								console.log("b4");
+							},
+							async (props) => {
+								console.log("b4");
+							},
+						],
+						mount: async (props) => {
+							console.log("mount4");
+						},
+						unmount: async (props) => {
+							console.log("unmount4");
+						},
+					};
+				},
+				(location) => location.pathname.startsWith("/app4"),
+				{ store: { name: "yehuozhili4" } }
+            );
+
+
+
+			singleSpa.start();
+		</script>
+	</body>
+</html>
